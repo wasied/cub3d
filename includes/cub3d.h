@@ -6,7 +6,7 @@
 /*   By: mpeharpr <mpeharpr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:28:01 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/10/19 17:26:25 by mpeharpr         ###   ########.fr       */
+/*   Updated: 2022/10/19 18:11:17 by mpeharpr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ and/or uncorrectly formated infos\n"
 # define ERR_MLX			"Mlx init failure\n"
 /* problem with ray calculation */
 # define ERR_RAY  			"The ray has been out of the map\n"
+/* problem with unexistant texture path */
+# define ERR_TXT_PATH		"Texture is not in .xpm format or invalid path\n"
 
 /* MACROS FOR WINDOW SIZE */
 
@@ -295,20 +297,11 @@ void		err_msg_and_free_all(char *spec, t_game *game);
 double		ceil_double(double nb);
 double		calc_dist(double x1, double y1, double x2, double y2);
 /* parsing_tools.c */
-void		convert_to_intarr(t_infomap *infomap, \
-	char *line, char **color_arr);
-
-/* !!! DEBUG FUNCS : DESTROY BEFORE PUSHING TO VOGSPHERE !!! */
-
-void		print_infomap_infos(t_infomap *infomap);
-void		print_infos(t_infomap *infomap);
-void		print_oneline(t_infomap *infomap);
-void		leaks_killing(void);
-void		print_cub_file(t_infomap *infomap);
-void		print_split(char **split);
-void		put_xpm_img_to_test(t_game *game);
-void		reproduce_texture(t_game *game, int img_index);
-void		print_ptns(t_game *game);
-void		track_the_leaks(t_game *game);
+int			is_texture_path_valid(char *path);
+void		convert_to_intarr(t_infomap *infomap,
+				char *line, char **color_arr);
+/* textures.c */
+void		get_texts_north_south(t_game *game, t_infomap *infomap);
+void		get_texts_west_east(t_game *game, t_infomap *infomap);
 
 #endif
