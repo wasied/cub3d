@@ -6,7 +6,7 @@
 /*   By: mpeharpr <mpeharpr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:06:08 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/10/17 06:55:17 by mpeharpr         ###   ########.fr       */
+/*   Updated: 2022/10/19 18:09:46 by mpeharpr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	update_coord(t_game *game, t_player *ply)
 {
 	int	multiplier;
 
-	multiplier = 3 + 3 * game->keys[6];
+	multiplier = 5 + 4 * game->keys[6];
 	if (game->keys[0] == true)
 	{
 		ply->pos_x += cos(ply->ang_y * M_PI / 180) * multiplier;
@@ -79,9 +79,9 @@ int	update_player_data(t_game *game, t_player *ply)
 	prev_ang = ply->ang_y;
 	update_coord(game, ply);
 	if (game->keys[4])
-		ply->ang_y -= 2;
+		ply->ang_y -= 3;
 	if (game->keys[5])
-		ply->ang_y += 2;
+		ply->ang_y += 3;
 	correct_pos(game, ply, prev_pos_x, prev_pos_y);
 	return (is_data_updated(ply, prev_pos_x, prev_pos_y, prev_ang));
 }
