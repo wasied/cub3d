@@ -6,7 +6,7 @@
 /*   By: mpeharpr <mpeharpr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:28:01 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/10/18 21:22:51 by mpeharpr         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:26:25 by mpeharpr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,7 +268,7 @@ void		get_colors(t_game *game);
 void		mlx_pixel_put_to_img(t_img *mlx_img, int x, int y, int color);
 int			get_color_in_texture(t_img *mlx_img, int x, int y);
 /* init_img_struct.c */
-t_img	*init_img_struct(void *mlx, int x, int y, int type);
+t_img		*init_img_struct(void *mlx, int x, int y, int type);
 /* render_frame.c */
 int			render_frame(t_game *game);
 /* render_algo.c */
@@ -295,8 +295,8 @@ void		err_msg_and_free_all(char *spec, t_game *game);
 double		ceil_double(double nb);
 double		calc_dist(double x1, double y1, double x2, double y2);
 /* parsing_tools.c */
-void		convert_to_intarr(t_infomap *infomap,
-		char *line, char **color_arr);
+void		convert_to_intarr(t_infomap *infomap, \
+	char *line, char **color_arr);
 
 /* !!! DEBUG FUNCS : DESTROY BEFORE PUSHING TO VOGSPHERE !!! */
 
