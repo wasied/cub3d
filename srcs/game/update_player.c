@@ -6,7 +6,7 @@
 /*   By: mpeharpr <mpeharpr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:06:08 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/10/19 18:09:46 by mpeharpr         ###   ########.fr       */
+/*   Updated: 2022/10/19 18:31:31 by mpeharpr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,30 @@ static int	is_data_updated(t_player *ply, double prev_x,
 	return (1);
 }
 
-/* If this is out of the map, we put the player back to his previous position */
-
-static void	correct_pos(t_game *game, t_player *ply,
-	double prev_pos_x, double prev_pos_y)
+/* Check if there is a wall near the player */
+static int	wall_near_ply(t_game *game, t_player *ply)
 {
-	if (game->infomap->map[(int)ply->pos_y
-			/ CUBES_SIZE][(int)ply->pos_x / CUBES_SIZE] == '1')
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < game->infomap->size_y)
 	{
-		ply->pos_x = prev_pos_x;
-		ply->pos_y = prev_pos_y;
+		x = 0;
+		while (x < game->infomap->size_x)
+		{
+			if (game->infomap->map[y][x] == '1')
+			{
+				if (calc_dist((double)(x * CUBES_SIZE + CUBES_SIZE / 2), \
+				(double)(y * CUBES_SIZE + CUBES_SIZE / 2), ply->pos_x, \
+				ply->pos_y) <= 48)
+					return (1);
+			}
+			x++;
+		}
+		y++;
 	}
+	return (0);
 }
 
 /* update pos (x, y ) of the player when WASD key are pressed */
@@ -82,6 +95,10 @@ int	update_player_data(t_game *game, t_player *ply)
 		ply->ang_y -= 3;
 	if (game->keys[5])
 		ply->ang_y += 3;
-	correct_pos(game, ply, prev_pos_x, prev_pos_y);
+	if (wall_near_ply(game, ply))
+	{
+		ply->pos_x = prev_pos_x;
+		ply->pos_y = prev_pos_y;
+	}
 	return (is_data_updated(ply, prev_pos_x, prev_pos_y, prev_ang));
 }
