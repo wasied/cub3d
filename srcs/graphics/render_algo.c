@@ -20,11 +20,13 @@ static int	get_color(t_game *game, t_raysult res, int y, double *walls)
 
 	offsety = (y - walls[0]) / walls[1] * 64;
 	if (res.wall_orientation == 'N')
-		cur_color = get_color_in_texture(game->no_texture, CUBES_SIZE - res.offset, offsety);
+		cur_color = get_color_in_texture(game->no_texture,
+				CUBES_SIZE - res.offset, offsety);
 	else if (res.wall_orientation == 'S')
 		cur_color = get_color_in_texture(game->so_texture, res.offset, offsety);
 	else if (res.wall_orientation == 'E')
-		cur_color = get_color_in_texture(game->ea_texture, CUBES_SIZE - res.offset, offsety);
+		cur_color = get_color_in_texture(game->ea_texture,
+				CUBES_SIZE - res.offset, offsety);
 	else
 		cur_color = get_color_in_texture(game->we_texture, res.offset, offsety);
 	return (cur_color);
