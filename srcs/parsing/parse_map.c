@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mpeharpr <mpeharpr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:48:53 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/10/18 12:29:24 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/10/20 19:35:45 by mpeharpr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,38 @@
 
 /* parse_map is used to parse the grid of the map 
 (the part composed of 0, 1 and player starting position and orientation) */
-
 static void	fulfill_map(t_infomap *infomap, int i)
 {
+	int			y;
 	int			j;
 
-	j = 0;
-	while (j < infomap->size_y)
+	y = 0;
+	while (y < infomap->size_y)
 	{
-		infomap->map[j] = ft_strdup(infomap->cub[i + j]);
-		if (!infomap->map[j])
+		infomap->map[y] = malloc(sizeof(char) * (infomap->size_x + 1));
+		if (!infomap->map[y])
 		{
-			free_problem_str_arr(&infomap->map, j);
+			free_problem_str_arr(&infomap->map, y);
 			infomap->map = NULL;
 			err_msg_and_free_map(ERR_MALLOC, infomap);
 		}
-		j++;
+		j = 0;
+		while (j < infomap->size_x)
+		{
+			infomap->map[y][j] = '1';
+			j++;
+		}
+		infomap->map[y][j] = 0;
+		j = 0;
+		while (infomap->cub[i + y][j])
+		{
+			if (ft_isalnum(infomap->cub[i + y][j]))
+				infomap->map[y][j] = infomap->cub[i + y][j];
+			j++;
+		}
+		y++;
 	}
-	infomap->map[j] = NULL;
+	infomap->map[y] = NULL;
 }
 
 /* calc_map_dimensions allows to calculate infomap->size_y &&
