@@ -6,7 +6,7 @@
 /*   By: mpeharpr <mpeharpr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:48:53 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/10/20 19:35:45 by mpeharpr         ###   ########.fr       */
+/*   Updated: 2022/10/20 21:32:39 by mpeharpr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ static void	fulfill_map(t_infomap *infomap, int i)
 		j = 0;
 		while (j < infomap->size_x)
 		{
-			infomap->map[y][j] = '1';
+			infomap->map[y][j] = ' ';
 			j++;
 		}
-		infomap->map[y][j] = 0;
+		infomap->map[y][j] = '\0';
 		j = 0;
-		while (infomap->cub[i + y][j])
+		while (infomap->cub[i + y][j] && j < infomap->size_x)
 		{
 			if (ft_isalnum(infomap->cub[i + y][j]))
 				infomap->map[y][j] = infomap->cub[i + y][j];
@@ -78,6 +78,8 @@ void	parse_map(t_infomap *infomap, int i)
 	infomap->map = (char **)malloc(sizeof(char *) * (infomap->size_y + 1));
 	if (!infomap->map)
 		err_msg_and_free_map(ERR_MALLOC, infomap);
+	for (int y = 0; y < infomap->size_y; y++)
+		infomap->map[y] = NULL;
 	fulfill_map(infomap, i);
 	free_split(&infomap->cub);
 	infomap->cub = NULL;

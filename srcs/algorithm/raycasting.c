@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mpeharpr <mpeharpr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 16:46:28 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/10/18 11:12:20 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/10/20 21:28:27 by mpeharpr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,13 @@ void	send_raycast(t_game *game, double ray_ang, t_raysult *res)
 		if (ray.order[i][0] != -1.0 && ray.order[i][1] != -1.0)
 		{
 			calc_map(&ray, ray.order[i][0], ray.order[i][1], ray.order[i][2]);
+			if (ray.cur_map_y >= game->infomap->size_y || ray.cur_map_y < 0 || ray.cur_map_x >= game->infomap->size_x || ray.cur_map_y < 0)
+			{
+				res->dist = -1.0;
+				res->wall_orientation = 'N';
+				res->offset = 0;
+				break ;
+			}
 			if (ray.map[ray.cur_map_y][ray.cur_map_x] == '1')
 			{
 				calc_wall_orientation(&ray, res, i);

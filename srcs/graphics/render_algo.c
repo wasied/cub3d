@@ -6,7 +6,7 @@
 /*   By: mpeharpr <mpeharpr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 16:47:08 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/10/19 18:35:00 by mpeharpr         ###   ########.fr       */
+/*   Updated: 2022/10/20 21:27:08 by mpeharpr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,18 @@ void	render_walls(t_game *game, int idx, double start_ang)
 	while (start_ang < game->ply->ang_y + (PLY_VIEW_FOV_DEG / 2))
 	{
 		send_raycast(game, start_ang, &res);
-		calc_walls(game, res, &walls[1], &walls[0]);
-		y = walls[0];
-		if (y < 0)
-			y = 0;
-		while (y < game->imgs_set[idx]->height && y < walls[0] + walls[1])
+		if (res.dist != -1)
 		{
-			mlx_pixel_put_to_img(game->imgs_set[idx], x, y, \
-			get_color(game, res, y, walls));
-			y++;
+			calc_walls(game, res, &walls[1], &walls[0]);
+			y = walls[0];
+			if (y < 0)
+				y = 0;
+			while (y < game->imgs_set[idx]->height && y < walls[0] + walls[1])
+			{
+				mlx_pixel_put_to_img(game->imgs_set[idx], x, y, \
+				get_color(game, res, y, walls));
+				y++;
+			}
 		}
 		x++;
 		start_ang += (double)PLY_VIEW_FOV_DEG / (double)game->wdw_x;

@@ -6,7 +6,7 @@
 #    By: mpeharpr <mpeharpr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/15 16:19:40 by cjulienn          #+#    #+#              #
-#    Updated: 2022/10/20 19:09:48 by mpeharpr         ###   ########.fr        #
+#    Updated: 2022/10/20 21:27:25 by mpeharpr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ NAME := Cub3D
 TEST_NAME := Cub3D_test
 
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS := -Wall -Wextra -Werror
 
 INCLUDES := -I includes
 
