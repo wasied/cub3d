@@ -6,7 +6,7 @@
 /*   By: mpeharpr <mpeharpr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 16:46:28 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/10/21 09:43:07 by mpeharpr         ###   ########.fr       */
+/*   Updated: 2022/10/21 10:01:55 by mpeharpr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ static void	calc_map(t_ray *ray, double x, double y, double is_vert)
 		pos_x--;
 	else if (!is_vert && ray->ang > 0 && ray->ang < 180)
 		pos_y--;
-	if (pos_x < 0 || pos_x > ray->size_x || pos_y < 0 || pos_y > ray->size_y)
-		free_ray_when_problem(ray, ERR_RAY);
 	ray->cur_map_x = pos_x;
 	ray->cur_map_y = pos_y;
 }
@@ -50,14 +48,16 @@ static void	init_raycast(t_game *game, t_ray *ray, double ray_ang, int *i)
 }
 
 /* Called for every ray to check and break if the ray is invalid */
-static int	is_invalid_ray(t_game *game, t_ray ray, t_raysult *res)
+static int	is_invalid_ray(t_game *game, t_ray *ray, t_raysult *res)
 {
-	if (ray.cur_map_y >= game->infomap->size_y || ray.cur_map_y < 0 || \
-	ray.cur_map_x >= game->infomap->size_x || ray.cur_map_y < 0)
+	if (ray->cur_map_y >= game->infomap->size_y || ray->cur_map_y < 0 || \
+	ray->cur_map_x >= game->infomap->size_x || ray->cur_map_y < 0)
 	{
 		res->dist = -1.0;
 		res->wall_orientation = 'N';
 		res->offset = 0;
+		ray->cur_map_x = 0;
+		ray->cur_map_y = 0;
 		return (1);
 	}
 	return (0);
@@ -87,7 +87,7 @@ void	send_raycast(t_game *game, double ray_ang, t_raysult *res)
 		if (ray.order[i][0] != -1.0 && ray.order[i][1] != -1.0)
 		{
 			calc_map(&ray, ray.order[i][0], ray.order[i][1], ray.order[i][2]);
-			if (is_invalid_ray(game, ray, res))
+			if (is_invalid_ray(game, &ray, res))
 				break ;
 			if (ray.map[ray.cur_map_y][ray.cur_map_x] == '1')
 			{
