@@ -6,7 +6,7 @@
 /*   By: mpeharpr <mpeharpr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 16:47:08 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/10/20 21:27:08 by mpeharpr         ###   ########.fr       */
+/*   Updated: 2022/10/21 09:37:07 by mpeharpr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,10 @@ static void	calc_walls(t_game *game, t_raysult res, double *height, double *y)
 }
 
 /* Render walls from the map with the raycasting algorithm */
-void	render_walls(t_game *game, int idx, double start_ang)
+void	render_walls(t_game *game, int idx, double start_ang, int x)
 {
 	double		walls[2];
 	int			y;
-	int			x;
 	t_raysult	res;
 
 	start_ang = game->ply->ang_y - (PLY_VIEW_FOV_DEG / 2);

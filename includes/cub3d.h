@@ -6,7 +6,7 @@
 /*   By: mpeharpr <mpeharpr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:28:01 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/10/19 18:11:17 by mpeharpr         ###   ########.fr       */
+/*   Updated: 2022/10/21 09:43:36 by mpeharpr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,6 +219,7 @@ void		send_raycast(t_game *game, double ray_ang, t_raysult *res);
 /* intersections.c */
 void		find_vert_inter(t_ray *ray);
 void		find_horiz_inter(t_ray *ray);
+void		calc_wall_orientation(t_ray *ray, t_raysult *res, int i);
 /* filter.c */
 void		create_inter_array(t_ray *ray);
 /* allocationc.c */
@@ -274,7 +275,7 @@ t_img		*init_img_struct(void *mlx, int x, int y, int type);
 /* render_frame.c */
 int			render_frame(t_game *game);
 /* render_algo.c */
-void		render_walls(t_game *game, int img_index, double start_ang);
+void		render_walls(t_game *game, int img_index, double start_ang, int x);
 
 /* PARSING */
 

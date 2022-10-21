@@ -6,7 +6,7 @@
 /*   By: mpeharpr <mpeharpr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:06:08 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/10/20 21:10:59 by mpeharpr         ###   ########.fr       */
+/*   Updated: 2022/10/21 09:34:56 by mpeharpr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ static int	wall_near_ply(t_game *game, t_player *ply)
 {
 	int		x;
 	int		y;
-	double	wx;
-	double	wy;
 
-	if (ply->pos_x <= 64 && ply->pos_y <= 64 && ply->pos_x >= (game->infomap->size_x - 1) * 64 && ply->pos_y >= (game->infomap->size_y - 1) * 64)
+	if (ply->pos_x <= 64 && ply->pos_y <= 64 && ply->pos_x >= (game->\
+	infomap->size_x - 1) * 64 && ply->pos_y >= (game->infomap->size_y - 1) * 64)
 		return (1);
 	y = 0;
 	while (y < game->infomap->size_y)
@@ -38,13 +37,11 @@ static int	wall_near_ply(t_game *game, t_player *ply)
 		x = 0;
 		while (x < game->infomap->size_x)
 		{
-			if (game->infomap->map[y][x] == '1')
-			{
-				wx = (double)(x * CUBES_SIZE);
-				wy = (double)(y * CUBES_SIZE);
-				if (ply->pos_x >= wx - 5 && ply->pos_y >= wy - 5 && ply->pos_x <= wx + CUBES_SIZE + 5 && ply->pos_y <= wy + CUBES_SIZE + 5)
-					return (1);
-			}
+			if (game->infomap->map[y][x] == '1' && (ply->pos_x >= ((double)(x * \
+			CUBES_SIZE)) - 5 && ply->pos_y >= ((double)(y * CUBES_SIZE)) - 5 \
+			&& ply->pos_x <= ((double)(x * CUBES_SIZE)) + CUBES_SIZE + 5 && \
+			ply->pos_y <= ((double)(y * CUBES_SIZE)) + CUBES_SIZE + 5))
+				return (1);
 			x++;
 		}
 		y++;
