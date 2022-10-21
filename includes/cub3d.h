@@ -6,7 +6,7 @@
 /*   By: mpeharpr <mpeharpr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:28:01 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/10/21 09:43:36 by mpeharpr         ###   ########.fr       */
+/*   Updated: 2022/10/21 10:09:10 by mpeharpr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,7 @@ and/or uncorrectly formated infos\n"
 
 /* MACROS FOR GAME SETTINGS */
 
-# define WALL_HEIGHT		64
 # define CUBES_SIZE			64
-# define PLY_VIEW_HEIGHT	32
 # define PLY_VIEW_FOV_DEG	60
 
 /* MACROS FOR IMG CREATION */
