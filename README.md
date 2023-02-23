@@ -1,6 +1,8 @@
 # cub3d
 A Wolfenstein 3D-like game made with raycasting in C
 
+![image](https://user-images.githubusercontent.com/72105771/220828292-b70585b4-5137-4796-9e34-c3add929aed2.png)
+
 # What is that?
 I made this game for School42 with my mate (cjulienn).
 The goal is to "reproduce" the basics of Wolfenstein 3D, the world first FPS video-game that was created, in C.  
